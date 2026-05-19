@@ -1,26 +1,172 @@
 @import "tailwindcss";
 
+/* General Sans Font Face */
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Extralight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-ExtralightItalic.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-SemiboldItalic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Fresh Start — Green Color Palette */
+  --color-green-primary:  #1CB24E;
+  --color-green-light:    #61BD68;
+  --color-green-mid:      #34B55E;
+  --color-green-deep:     #178F46;
+  --color-green-dark:     #126735;
+  --color-green-obsidian: #113D1F;
+
+  /* Neutrals */
+  --color-ivory:   #FAFAF8;
+  --color-white:   #FFFFFF;
+  --color-stone:   #E8E6E0;
+  --color-gray:    #6B6B6B;
+  --color-charcoal:#2A2A2A;
+  --color-black:   #0A0A0A;
+
+  /* Semantic */
+  --background: var(--color-ivory);
+  --foreground: var(--color-black);
+  --accent:     var(--color-green-primary);
+
+  /* Font */
+  --font-sans: 'General Sans', system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-black);
+}
+
+h1 { font-size: clamp(3rem, 8vw, 7rem);  font-weight: 600; }
+h2 { font-size: clamp(2rem, 5vw, 4rem);  font-weight: 600; }
+h3 { font-size: clamp(1.25rem, 3vw, 2rem); font-weight: 500; }
+
+p {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-gray);
+}
+
+/* Utility classes */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.section {
+  padding: 120px 0;
+}
+
+.green-line {
+  width: 48px;
+  height: 2px;
+  background: var(--color-green-primary);
+  display: block;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-ivory); }
+::-webkit-scrollbar-thumb { background: var(--color-green-mid); border-radius: 3px; }
