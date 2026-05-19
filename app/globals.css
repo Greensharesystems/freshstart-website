@@ -170,3 +170,11 @@ p {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-ivory); }
 ::-webkit-scrollbar-thumb { background: var(--color-green-mid); border-radius: 3px; }
+
+/* No horizontal scroll */
+html, body { overflow-x: hidden; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

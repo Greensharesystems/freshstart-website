@@ -16,6 +16,7 @@ export default function Home() {
             justifyContent: 'center',
             fontFamily: "'General Sans', system-ui, sans-serif",
             borderBottom: '1px solid #e8e6e0',
+            padding: 'clamp(60px, 8vw, 120px) clamp(20px, 4vw, 40px)',
           }}
         >
           <h2
@@ -24,6 +25,7 @@ export default function Home() {
               fontWeight: 700,
               color: '#1CB24E',
               margin: 0,
+              textAlign: 'center',
             }}
           >
             {title}

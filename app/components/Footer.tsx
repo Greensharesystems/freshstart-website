@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -20,6 +23,15 @@ const LINKS = {
 }
 
 export default function Footer() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   return (
     <footer
       style={{
@@ -33,14 +45,14 @@ export default function Footer() {
         style={{
           maxWidth: 1400,
           margin: '0 auto',
-          padding: '64px 24px 40px',
+          padding: isMobile ? '48px 20px 32px' : '64px 24px 40px',
           display: 'grid',
-          gridTemplateColumns: '1fr repeat(3, auto)',
-          gap: 64,
+          gridTemplateColumns: isMobile ? '1fr' : '1fr repeat(3, auto)',
+          gap: isMobile ? 32 : 64,
         }}
       >
         {/* Brand column */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: isMobile ? 'center' : 'flex-start' }}>
           <Link href="/" style={{ textDecoration: 'none', display: 'inline-block' }}>
             <Image
               src="/freshstartlogowhite.png"
@@ -58,6 +70,7 @@ export default function Footer() {
               lineHeight: 1.7,
               maxWidth: 280,
               margin: 0,
+              textAlign: isMobile ? 'center' : 'left',
             }}
           >
             Collecting, recycling, and repurposing worn footwear to keep shoes
@@ -67,7 +80,7 @@ export default function Footer() {
 
         {/* Link columns */}
         {Object.entries(LINKS).map(([heading, items]) => (
-          <div key={heading} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div key={heading} style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: isMobile ? 'center' : 'flex-start' }}>
             <h4
               style={{
                 color: 'white',
@@ -80,7 +93,7 @@ export default function Footer() {
             >
               {heading}
             </h4>
-            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10, alignItems: isMobile ? 'center' : 'flex-start' }}>
               {items.map(({ label, href }) => (
                 <li key={label}>
                   <Link
@@ -107,15 +120,15 @@ export default function Footer() {
           borderTop: '1px solid rgba(255,255,255,0.15)',
           maxWidth: 1400,
           margin: '0 auto',
-          padding: '20px 24px',
+          padding: isMobile ? '16px 20px' : '20px 24px',
           display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          flexWrap: 'wrap',
           gap: 12,
         }}
       >
-        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, fontWeight: 300, margin: 0 }}>
+        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: isMobile ? 12 : 13, fontWeight: 300, margin: 0, textAlign: 'center' }}>
           &copy; {new Date().getFullYear()} Fresh Start. All rights reserved.
         </p>
         <div style={{ display: 'flex', gap: 24 }}>
@@ -123,7 +136,7 @@ export default function Footer() {
             <Link
               key={label}
               href={`/${label.toLowerCase().replace(/ /g, '-')}`}
-              style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, fontWeight: 300, textDecoration: 'none' }}
+              style={{ color: 'rgba(255,255,255,0.6)', fontSize: isMobile ? 12 : 13, fontWeight: 300, textDecoration: 'none' }}
             >
               {label}
             </Link>

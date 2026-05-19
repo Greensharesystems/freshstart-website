@@ -1,25 +1,40 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 export default function Hero() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   return (
     <section
       style={{
         backgroundColor: '#1CB24E',
-        minHeight: '90vh',
+        minHeight: '100svh',
         display: 'flex',
         alignItems: 'center',
         fontFamily: "'General Sans', system-ui, sans-serif",
+        paddingTop: isMobile ? 120 : 0,
       }}
     >
       <div
         style={{
           maxWidth: 1400,
           margin: '0 auto',
-          padding: '0 24px',
+          padding: isMobile ? '60px 20px' : '0 24px',
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
           gap: 32,
+          alignItems: isMobile ? 'center' : 'flex-start',
+          textAlign: isMobile ? 'center' : 'left',
         }}
       >
         {/* Eyebrow */}
@@ -40,7 +55,7 @@ export default function Hero() {
         <h1
           style={{
             color: 'white',
-            fontSize: 'clamp(40px, 6vw, 80px)',
+            fontSize: 'clamp(2.5rem, 8vw, 7rem)',
             fontWeight: 700,
             lineHeight: 1.1,
             margin: 0,
@@ -55,7 +70,7 @@ export default function Hero() {
         <p
           style={{
             color: 'rgba(255,255,255,0.85)',
-            fontSize: 'clamp(16px, 2vw, 20px)',
+            fontSize: isMobile ? 15 : 'clamp(16px, 2vw, 20px)',
             fontWeight: 300,
             lineHeight: 1.6,
             margin: 0,
@@ -67,7 +82,7 @@ export default function Hero() {
         </p>
 
         {/* CTAs */}
-        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 16, width: isMobile ? '100%' : 'auto' }}>
           <Link
             href="/donate"
             style={{
@@ -80,6 +95,8 @@ export default function Hero() {
               fontWeight: 600,
               fontFamily: "'General Sans', system-ui, sans-serif",
               display: 'inline-block',
+              textAlign: 'center',
+              minHeight: 44,
             }}
           >
             Donate a Sole
@@ -97,6 +114,8 @@ export default function Hero() {
               fontFamily: "'General Sans', system-ui, sans-serif",
               border: '1px solid rgba(255,255,255,0.6)',
               display: 'inline-block',
+              textAlign: 'center',
+              minHeight: 44,
             }}
           >
             Our Story
